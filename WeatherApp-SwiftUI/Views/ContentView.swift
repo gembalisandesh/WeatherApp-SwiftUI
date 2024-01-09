@@ -1,14 +1,8 @@
-//
-//  ContentView.swift
-//  WeatherApp-SwiftUI
-//
-//  Created by Gembali Sandesh Kumar on 07/01/24.
-//
-
 import SwiftUI
 import CoreLocation
 
 struct ContentView: View {
+
     @ObservedObject var cityVM = WeatherViewModel()
     @ObservedObject var locationManager = LocationManager.shared
     @State private var isLoading = true
@@ -33,15 +27,11 @@ struct ContentView: View {
         .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)), Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))]), startPoint: .topLeading, endPoint: .topTrailing))
         .edgesIgnoringSafeArea(.all)
         .onAppear {
-            locationManager.requestAuthorization()
-            if locationManager.isAuthorized {
-                cityVM.getWeatherForCurrentLocation()
-            }
+            // Simulate data loading (replace with your actual data fetching logic)
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 isLoading = false
             }
         }
-
     }
 }
 
