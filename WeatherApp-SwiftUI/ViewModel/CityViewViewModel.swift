@@ -25,14 +25,13 @@ final class WeatherViewModel: ObservableObject {
         }
     }
     
-    private func getWeatherForCurrentLocation() {
-            if let currentLocation = locationManager.getCurrentLocation() {
-                let urlString = API.getURLFor(lat: currentLocation.latitude, lon: currentLocation.longitude)
-                getWeatherInternal(city: "Current Location", for: urlString)
+    func getWeatherForCurrentLocation() {
+            locationManager.getCurrentLocation { location in
+                guard let location = location else { return }
+                let urlString = API.getURLFor(lat: location.latitude, lon: location.longitude)
+                self.getWeatherInternal(city: "Current Location", for: urlString)
             }
-    }
-
-    
+        }
     private lazy var dateFormatter: DateFormatter = {
         
         let formatter = DateFormatter()
